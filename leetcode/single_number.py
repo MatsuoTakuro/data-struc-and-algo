@@ -17,6 +17,16 @@ def singleNumber(nums: List[int]) -> int:
     #   (111)2 xor (010)2 = (101)2 = (5)10
     # i = 1
     #   (101)2 xor (001)2 = (100)2 = (4)10
+
+    # can xor nums at all
+    #     (001)2
+    #     (010)2
+    #     (100)2
+    #     (010)2
+    #     (001)2
+    # xor)------
+    #     (100)2
+
     return uniq_num
 
 

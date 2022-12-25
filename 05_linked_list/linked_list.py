@@ -46,15 +46,15 @@ class LinkedList(object):
             current_node = None
             return
         # if next node's data is target data:
-        pre_node = None
+        prev_node = None
         while current_node and current_node.data != data:
-            pre_node = current_node
+            prev_node = current_node
             current_node = current_node.next
 
         if current_node is None:
             return
 
-        pre_node.next = current_node.next
+        prev_node.next = current_node.next
         # gc.collect()
         current_node = None
 

@@ -82,7 +82,7 @@ class LinkedList(object):
         self.head = _reverse_recursive(self.head, None)
 
     def reverse_even(self) -> None:
-        def _reverse_even(head: Node, prev_node: Node) -> Optional(Node):
+        def _reverse_even(head: Node, prev_node: Node) -> Optional[Node]:
             if head is None:
                 return None
 

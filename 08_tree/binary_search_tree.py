@@ -44,15 +44,59 @@ def search(node: Node, value: Any) -> bool:
         return search(node.right, value)
 
 
+def min_node(node: Node) -> Node:
+    current = node
+    while current.left:
+        current = current.left
+    return current
+
+
+def remove(node: Node, value: Any) -> Node:
+    if node is None:
+        return node
+
+    if value < node.value:
+        node.left = remove(node.left, value)
+    elif value > node.value:
+        node.right = remove(node.right, value)
+    else:  # value == node.value
+        if node.left is None:
+            return node.right
+
+        if node.right is None:
+            return node.left
+
+        temp_node = min_node(node.right)
+        node.value = temp_node.value
+        node.right = remove(node.right, temp_node.value)
+
+    return node
+
+
 if __name__ == "__main__":
+    # result after remove(root, 6)
+    #     3                 3
+    #    / \               / \
+    #   /   \             /   \
+    #  1     6      ->   1     7
+    #   \   / \           \   / \
+    #    2 5   9           2 5   9
+    #         / \               / \
+    #        8   10            8   10
+    #       /
+    #      7
     root = insert(None, 3)
     root = insert(root, 6)
     root = insert(root, 5)
-    root = insert(root, 7)
+    root = insert(root, 9)
     root = insert(root, 1)
     root = insert(root, 10)
     root = insert(root, 2)
+    root = insert(root, 8)
+    root = insert(root, 7)
     in_order(root)
     print(search(root, 2))
     print(search(root, 5))
     print(search(root, 4))
+    print("####### Remove")
+    in_order(remove(root, 6))

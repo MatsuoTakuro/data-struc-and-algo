@@ -1,22 +1,24 @@
+from collections import Counter
 import heapq
+from typing import List
 
-words = ["python", "java", "go", "python", "c", "go", "python"]
 
-numbers = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
-numbers2 = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
-heap_data = []
+def top_n_with_heap(words: list[str], n: int) -> list[str]:
+    # d = {}
+    # for word in words:
+    #     d[word] = d.get(word, 0) + 1
+    # data = [(-d[word], word) for word in d]
+    # heapq.heapify(data)
+    # return [heapq.heappop(data)[1] for _ in range(n)]
 
-print(numbers)
-heapq.heapify(numbers)
-print(numbers)
-print(heapq.nlargest(3, numbers))  # we will implement this using other methods!
-print(heapq.nsmallest(3, numbers))
-while numbers:
-    print(heapq.heappop(numbers))
+    counter_words = Counter(words)
+    # return [word[0] for word in counter_words.most_common(n)]
 
-print(numbers2)
-for num in numbers2:
-    heapq.heappush(heap_data, num)
-print(heap_data)
-while heap_data:
-    print(heapq.heappop(heap_data))
+    data = [(-counter_words[word], word) for word in counter_words]
+    heapq.heapify(data)
+    return [heapq.heappop(data)[1] for _ in range(n)]
+
+
+if __name__ == "__main__":
+    w = ["python", "c", "java", "go", "python", "c", "go", "python"]
+    print(top_n_with_heap(w, 3))
